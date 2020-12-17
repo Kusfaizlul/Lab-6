@@ -22,7 +22,7 @@ def process_start(s_sock):
 
 	s_sock.close()
 
-if __name__ == '__main__':
+if __name__=='__main__':
 
 	s = socket.socket( socket.AF_INET, socket.SOCK_STREAM )
 	s.bind(( '' , 8888 ))
@@ -34,7 +34,7 @@ if __name__ == '__main__':
 		while True:
 			try:
 				s_sock, s_addr = s.accept()
-				p = Process(target = process_start, args=(s_sock, ))
+				p = Process(target = process_start, args=(s_sock,))
 				p.start()
 
 			except socket.error:
