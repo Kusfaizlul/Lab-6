@@ -18,8 +18,7 @@ while True:
     print (' 9. Exit ')
     
     ans = input ('\n Enter your choice : ' )
-
-    numb = iput ('\n Enter Number : ')
+    Client.send(ans.encode())
 
     if ans == '1':
         #log
