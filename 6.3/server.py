@@ -1,37 +1,59 @@
 import socket 
 import math 
-import erno 
+import errno 
+import sys
+from multiprocessing import Process
 
-Server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-host = ''
-port = 4848
+def ProcessStart(server):
 
-try:
-    Server.Socket.bind((host,port))
-except socket.error as e:
-    print (str(e))
+     while True:
+            ch = server.recv(1024).decode()
 
-Server.listen(5)
+            if ch == '1':
+                #log calculation
+                numb = server.recv(1024).decode()
+                calc = math.log(float(numb))
 
-while True:
-    s = Server.accept()
-    print ('\n Sucessfully Connected !! ')
+            elif ch  == '2':
+                #SquareRoot calculation
+                numb = server.recv(1024).decode()
+                calc = math.sqrt(float(numb))
 
-    get = s.recv(1)
-    number = s.recv(1024)
+            elif ch  == '3':
+                #exponential Calculation
+                numb = server.recv(1024).decode()
+                calc = math.exp(float(numb))
 
-    if get.decode() == '1':
-        #log calculation
-        calc = math.log(float(number.decode()))
+            elif ch == '9':
+                server.close()
+                break
 
-    elif get.decode() == '2':
-        #SquareRoot calculation
-        calc = math.sqrt(float(number.decode()))
+            server.sendall(str(calc).encode())
 
-    elif get.decode() == '3':
-        #exponential Calculation
-        calc = math.exp(float(number.decode()))
-    elif get.decode() == '9':
-        s.close()
 
-    s.send(str(calc).decode())
+if __name__ == '__main__':
+    
+    S = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    host = ''
+    port = 4848
+
+    try:
+        S.bind((host,port))
+    except socket.error as e:
+        print (str(e))
+        sys.exit()
+
+    S.listen(5)
+    while True:
+        try:
+            server, addr = S.accept()
+            print ('\n Sucessfully Connected !! ')
+        
+            p = Process(target = ProcessStart, args=(server,))
+            p.start()
+
+        except socket.error:
+            print ('an exception occurred!')
+
+    S.close()
+
