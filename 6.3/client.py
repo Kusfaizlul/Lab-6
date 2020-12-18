@@ -1,4 +1,5 @@
 import socket 
+import sys
 
 Client = socket.socket()
 host = '192.168.14.10'
@@ -10,7 +11,9 @@ try:
 except socket.error as e:
     print ( str(e) )
 
-while True:
+loop = True
+
+while loop:
     print ('\n Welcome to math calculator python ')
     print (' 1. Logarithmic expression ')
     print (' 2. Square Root ')
@@ -18,8 +21,7 @@ while True:
     print (' 9. Exit ')
     
     ans = input ('\n Enter your choice : ' )
-
-    numb = iput ('\n Enter Number : ')
+    Client.send(ans.encode())
 
     if ans == '1':
         #log
@@ -52,7 +54,8 @@ while True:
     elif ans == '9':
         #exit
         Client.close()
-    else
+        sys.exit()
+    else:
         print ('\n Invalid input please try again !')
 
-    input ( 'Press Enter to Continue .. ')
+    input ( '\nPress Enter to Continue .. ')
