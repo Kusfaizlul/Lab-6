@@ -30,7 +30,7 @@ while loop:
         Client.send(numb.encode())
         tot = Client.recv(1024)
 
-        print ( 'Answer for log( '+ numb +' ) : ' + str(tot.decode()))
+        print ( ' Answer for log( '+ numb +' ) : ' + str(tot.decode()))
     elif ans == '2':
         #Suare Root   
         print ('\n [+] Square Root Function ')
@@ -38,7 +38,7 @@ while loop:
         Client.send(numb.encode())
         tot = Client.recv(1024)
 
-        print ( 'Answer for sqrt( ' + numb +' ): ' + str(tot.decode()))
+        print ( ' Answer for sqrt( ' + numb +' ): ' + str(tot.decode()))
 
 
     elif ans == '3':
@@ -48,7 +48,7 @@ while loop:
         Client.send(numb.encode())
         tot = Client.recv(1024)
 
-        print ( 'Answer for exp( ' + numb + ' ): ' + str(tot.decode()))
+        print ( ' Answer for exp( ' + numb + ' ): ' + str(tot.decode()))
 
 
     elif ans == '9':
@@ -58,4 +58,4 @@ while loop:
     else:
         print ('\n Invalid input please try again !')
 
-    input ( '\nPress Enter to Continue .. ')
+    input ( '\n Press Enter to Continue .. ')
