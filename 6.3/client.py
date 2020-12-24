@@ -32,11 +32,17 @@ while loop:
 
         print ( ' Answer for log( '+ numb +' ) : ' + str(tot.decode()))
     elif ans == '2':
-        #Suare Root   
-        print ('\n [+] Square Root Function ')
-        numb = input ('\n Enter Number : ')
-        Client.send(numb.encode())
-        tot = Client.recv(1024)
+        root = True
+        While root:
+            #Suare Root   
+            print ('\n [+] Square Root Function ')
+            numb = input ('\n Enter Number : ')
+            if int(numb) > -1 :
+                root = False
+                Client.send(numb.encode())
+                tot = Client.recv(1024)
+            else
+                print ('\n Square Root Cant Be Negative Number !! ')
 
         print ( ' Answer for sqrt( ' + numb +' ): ' + str(tot.decode()))
 
